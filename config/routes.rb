@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   resources :posts do
     resources :likes, only: [:create, :destroy]
     resources :comments, only: [:create]
-  end                                           
+  end
+  resources :rooms, only: [:index, :show] do
+    resources :messages, only: [:create]
+  end
   root 'posts#index'
 end
