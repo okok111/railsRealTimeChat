@@ -1,2 +1,14 @@
 <h1>Rooms#show</h1>
-<p>Find me in app/views/rooms/show.html.erb</p>
+<h1>Rooms#show</h1>
+<h1><%= @room.name %></h1>
+
+<div id="message-container">
+  <% @room.messages.each do |message| %>
+    <p><%= "#{message.user.email}: #{message.content}" %></p>
+  <% end %>
+</div>
+
+<%= form_with model: [@room, Message.new], url: room_messages_path(@room), method: :post, data: { turbo_frame: "message-container" } do |form| %>
+  <%= form.text_area :content %>
+  <%= form.submit "Send" %>
+<% end %>
