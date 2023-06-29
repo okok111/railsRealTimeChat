@@ -5,9 +5,9 @@
   <%= render @messages %>
 </div>
 
-<%= form_with model: [@room, @message], data: { turbo: true } do |form| %>
+<%= form_with model: [@room, @message], data: { action: "submit->chat#submit" } do |form| %>
   <p>
-    <%= form.text_field :content %>
+    <%= form.text_field :content, data: { target: "chat.input" } %>
     <%= form.submit "Send" %>
   </p>
 <% end %>
