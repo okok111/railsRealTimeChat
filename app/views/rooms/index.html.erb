@@ -6,3 +6,11 @@
     <li><%= link_to room.name, room_path(room) %></li>
   <% end %>
 </ul>
+
+<%= form_for @room do |f| %>
+  <p>
+    <%= f.label :name, "Room Name" %>
+    <%= f.text_field :name %>
+    <%= f.submit "Create Room" %>
+  </p>
+<% end %>
