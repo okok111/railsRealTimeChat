@@ -1,9 +1,9 @@
 import consumer from "./consumer"
 
-consumer.subscriptions.create("MessageChannel", {
+const appMessage = consumer.subscriptions.create("MessageChannel", {
   connected() {
     // Called when the subscription is ready for use on the server
-    console.log("Connected to the message channel.")
+    return alert(data['message']);
   },
 
   disconnected() {
@@ -13,12 +13,22 @@ consumer.subscriptions.create("MessageChannel", {
 
   received(data) {
     // Called when there's incoming data on the websocket for this channel
-    const messageContainer = document.getElementById('message-container');
-    const messageElement = document.createElement('p');
-    messageElement.textContent = `${data.user}: ${data.content}`;
-    messageContainer.appendChild(messageElement);
+    // const messageContainer = document.getElementById('message-container');
+    // const messageElement = document.createElement('p');
+    // messageElement.textContent = `${data.user}: ${data.content}`;
+    // messageContainer.appendChild(messageElement);
+    const messages = document.getElementById('messages');
+    messages.insertAdjacentHTML('beforeend', data['message'])
   },
-  speak(message, roomId) {
-    this.perform('speak', { message: message, room_id: roomId })
+  speak(message) {
+    return this.perform('speak', { message: message})
   }
 });
+
+window.addEventListener("keypress", function(e) {
+  if (e.keyCode === 13 ) {
+    appMessage.speak(e.target.value);
+    e.target.value = '';
+    e.preventDefault();
+  }
+})

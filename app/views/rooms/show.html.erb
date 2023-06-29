@@ -7,8 +7,14 @@
     <p><%= "#{message.user.email}: #{message.content}" %></p>
   <% end %>
 </div>
+<hr>
+<hr>
 
+<div id="messages">
+  <%= render @messages %>
+</div>
 <%= form_with model: [@room, Message.new], url: room_messages_path(@room), method: :post, data: { turbo_frame: "message-container" } do |form| %>
-  <%= form.text_area :content %>
+  <%#= form.text_field :content %>
+  <input type="text" name="message[content]" data-behavior="message_speak">
   <%= form.submit "Send" %>
 <% end %>
