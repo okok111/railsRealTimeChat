@@ -27,9 +27,9 @@
     <p>コメント一覧</p>
         <% @comments.each do |c| %>
             <div>
-            <%= c.user.email unless c.user.blank? %>
-            <br>
-            <%= c.content %>
+                <%= c.user.email unless c.user.blank? %>
+                <br>
+                <%= c.content %>
             </div>
             <br>
         <% end %>
