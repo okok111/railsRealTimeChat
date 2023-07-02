@@ -8,7 +8,4 @@ class PostChannel < ApplicationCable::Channel
     # Any cleanup needed when channel is unsubscribed
   end
 
-  def speak(data)
-    ActionCable.server.broadcast 'post_channel', comment: data['comment']
-  end
 end

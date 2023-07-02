@@ -7,6 +7,7 @@ class CommentsController < ApplicationController
       comment.user_id = current_user.id
       if comment.save
         flash[:success] = "コメントしました"
+        ActionCable.server.broadcast 'post_channel', {content: comment}
         redirect_back(fallback_location: root_path)
       else
         flash[:success] = "コメントできませんでした"

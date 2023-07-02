@@ -11,19 +11,11 @@ const appRoom = consumer.subscriptions.create("PostChannel", {
 
   received(data) {
     // Called when there's incoming data on the websocket for this channel
-    return alert(data['comment']);
+    const html = `<p>${data.content.content}</p>`;
+    const comments = document.getElementById('comments');
+    const newComment = document.getElementById('text');
+    comments.insertAdjacentHTML('afterbegin', html);
+    newComment.value='';
   },
 
-  speak: function(comment) {
-    return this.perform('speak', {comment: comment});
-  }
-
 });
-
-window.addEventListener("keypress", function(e) {
-  if (e.key === "Enter") {
-    appRoom.speak(e.target.value);
-    e.target.value = '';
-    e.preventDefault();
-  }
-})
