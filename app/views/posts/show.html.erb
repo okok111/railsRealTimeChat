@@ -26,12 +26,14 @@
     <div class="comment-wrapper">
     <p>コメント一覧</p>
     <hr>
-        <div id="messages">
+        <div id="commnets">
             <%= render @comments %>
         </div>
     <hr>
         <% if user_signed_in? %>
+          <form>
             <input type="text" name="comment[content]" data-behavior="post_speaker" placeholder="Enterで送信">
+          </form>
         <% end %>
         
     </div>
